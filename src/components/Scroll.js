@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
 export default class ScrollToTop extends Component {
   constructor(props) {
     super(props);

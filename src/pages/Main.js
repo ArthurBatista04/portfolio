@@ -15,31 +15,6 @@ const mainFeaturedPost = {
   imgText: "main image description",
 };
 
-const experiences = [
-  {
-    title: "Eureka Labs",
-    description: "Web Developer",
-    date: "2020 - Present",
-    local: "Maringá-PR",
-    icon: "work",
-  },
-  {
-    title: "State University of Maringá",
-    description: "Bachelor of Computer Science",
-    date: "2017 - Present",
-    local: "Maringá-PR",
-    icon: "school",
-  },
-  {
-    title: "PET-Informática",
-    description:
-      "Tutor of Programming Languages, Researcher and  Web Developer",
-    date: "2017 - 2020",
-    local: "Maringá-PR",
-    icon: "work",
-  },
-];
-
 
 class Main extends Component {
   render() {
@@ -50,7 +25,7 @@ class Main extends Component {
           <main>
             <Introdution post={mainFeaturedPost}></Introdution>
             <About></About>
-            <Experiences experiences={experiences}></Experiences>
+            <Experiences></Experiences>
             <Skills></Skills>
             <ContactForm></ContactForm>
           </main>

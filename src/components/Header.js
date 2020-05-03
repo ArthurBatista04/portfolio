@@ -44,7 +44,6 @@ export default function Header(props) {
           variant="h5"
           color="inherit"
           align="center"
-          noWrap
           className={classes.toolbarTitle}
         >
           {title}
@@ -57,7 +56,6 @@ export default function Header(props) {
       >
         {sections.map((section) => (
           <AnchorLink
-            noWrap
             key={section.title}
             variant="body2"
             href={section.url}
