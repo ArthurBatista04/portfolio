@@ -9,9 +9,11 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Divider from "@material-ui/core/Divider";
-import db from "../firebase/Firebase";
 import StarIcon from "@material-ui/icons/Star";
 import { SvgIcon } from "./";
+import { connect } from "react-redux";
+import { compose } from "ramda";
+import { selectSkills, getSkills } from "../redux/reducers/SkillsReducer";
 const useStyles = (theme) => ({
   root: {
     minWidth: 275,
@@ -41,38 +43,10 @@ class Skills extends React.Component {
   }
 
   componentWillMount() {
-    db.collection("Skills")
-      .orderBy("name")
-      .get()
-      .then((data) => {
-        const skills = data.docs.map((skill) => skill.data());
-        this.setState({
-          skills,
-        });
-        skills.map((skill) => this.getIcons(skill.icon_id));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-  getIcons(id) {
-    const { icons } = this.state;
-    if (id in icons) return;
-    db.collection("Icons")
-      .doc(id)
-      .get()
-      .then((response) => {
-        this.setState({
-          icons: { ...this.state.icons, [id]: response.data() },
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.props.getSkills();
   }
   render() {
-    const { classes } = this.props;
-    const { skills, icons } = this.state;
+    const { classes, skills } = this.props;
     return (
       <Card id="Skills" className={classes.root}>
         <CardContent>
@@ -86,8 +60,8 @@ class Skills extends React.Component {
                   <ListItem>
                     <ListItemAvatar>
                       <Avatar>
-                        {skill.icon_id && skill.icon_id in icons ? (
-                          <SvgIcon icon={icons[skill.icon_id]}></SvgIcon>
+                        {skill.icon ? (
+                          <SvgIcon icon={skill.icon}></SvgIcon>
                         ) : (
                           <StarIcon></StarIcon>
                         )}
@@ -109,4 +83,19 @@ class Skills extends React.Component {
   }
 }
 
-export default withStyles(useStyles)(Skills);
+const mapStateToProps = (state) => {
+  return {
+    skills: selectSkills(state),
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getSkills: () => dispatch(getSkills()),
+  };
+};
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(useStyles)
+)(Skills);
