@@ -27,6 +27,7 @@
     "react-scripts": "3.4.1",
     "react-vertical-timeline-component": "^2.6.2",
     "redux": "^4.0.5",
+    "redux-form": "^8.3.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "reduxsauce": "^1.1.2",
