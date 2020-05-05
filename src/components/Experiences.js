@@ -62,7 +62,7 @@ class Experiences extends React.Component {
       <Card id="Experience" className={classes.root}>
         <CardContent>
           <Typography className={classes.title} variant="h5" component="h2">
-            Experiences
+            What I've Been Doing
           </Typography>
           <VerticalTimeline>
             {experiences.map((experience, id) => (

@@ -1,10 +1,20 @@
 import React, { Component } from "react";
 import Container from "@material-ui/core/Container";
-import {Header, Introdution,About,Skills,ContactForm, Experiences, Footer} from '../components/'
+import {
+  Header,
+  Introdution,
+  About,
+  Skills,
+  ContactForm,
+  Experiences,
+  Footer,
+  Interests,
+} from "../components/";
 const sections = [
   { title: "About", url: "#About" },
-  { title: "Experience", url: "#Experience" },
+  { title: "Experiences", url: "#Experience" },
   { title: "Skills", url: "#Skills" },
+  { title: "Interests", url: "#Interests" },
   { title: "Contact", url: "#Contact" },
 ];
 
@@ -14,7 +24,6 @@ const mainFeaturedPost = {
     "https://wallpapertag.com/wallpaper/full/d/c/f/130130-download-dark-wallpaper-1920x1080-1920x1080-photo.jpg",
   imgText: "main image description",
 };
-
 
 class Main extends Component {
   render() {
@@ -27,6 +36,7 @@ class Main extends Component {
             <About></About>
             <Experiences></Experiences>
             <Skills></Skills>
+            <Interests></Interests>
             <ContactForm></ContactForm>
           </main>
         </Container>
