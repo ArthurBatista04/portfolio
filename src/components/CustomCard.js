@@ -7,8 +7,6 @@ import CardContent from "@material-ui/core/CardContent";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 
-
-
 const styles = (muiBaseTheme) => ({
   card: {
     maxWidth: 300,
@@ -26,10 +24,10 @@ const styles = (muiBaseTheme) => ({
   },
   content: {
     textAlign: "left",
-    padding: muiBaseTheme.spacing.unit * 3,
+    padding: muiBaseTheme.spacing(3),
   },
   divider: {
-    margin: `${muiBaseTheme.spacing.unit * 3}px 0`,
+    margin: `${muiBaseTheme.spacing(3)}px 0`,
   },
   heading: {
     fontWeight: "bold",
@@ -41,7 +39,7 @@ const styles = (muiBaseTheme) => ({
     display: "inline-block",
     border: "2px solid white",
     "&:not(:first-of-type)": {
-      marginLeft: -muiBaseTheme.spacing.unit,
+      marginLeft: muiBaseTheme.spacing(-1),
     },
   },
   app: {
@@ -72,9 +70,10 @@ class CustomCard extends React.Component {
               {info.description}
             </Typography>
             <Divider className={classes.divider} light />
-            {info.avatars && info.avatars.map((face) => (
-              <Avatar className={classes.avatar} key={face} src={face} />
-            ))}
+            {info.avatars &&
+              info.avatars.map((face) => (
+                <Avatar className={classes.avatar} key={face} src={face} />
+              ))}
           </CardContent>
         </Card>
       </div>

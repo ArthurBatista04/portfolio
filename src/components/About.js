@@ -7,6 +7,9 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import db from "../firebase/Firebase";
 import parse from "html-react-parser";
+import { connect } from "react-redux";
+import { compose } from "ramda";
+import { selectAbout, getAbout } from "../redux/reducers/AboutReducer";
 const useStyles = (theme) => ({
   root: {
     minWidth: 275,
@@ -35,35 +38,18 @@ const useStyles = (theme) => ({
 });
 
 class About extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { image: "", body: "" };
-  }
   componentWillMount() {
-    db.collection("Abouts")
-      .get()
-      .then((data) => {
-        const about = data.docs[0].data();
-        if (about)
-          this.setState({
-            image: about.pictures.src,
-            body: about.body,
-          });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.props.getAbout();
   }
   render() {
-    const { classes } = this.props;
-    const { image, body } = this.state;
+    const { classes, about } = this.props;
     return (
       <Card id="About" className={classes.root}>
         <Grid container direction="row" justify="center" alignItems="center">
           <CardMedia
             className={classes.media}
             component="img"
-            image={image}
+            image={about.pictures ? about.pictures.src : null}
             title="My profile picture"
           />
           <CardContent>
@@ -71,7 +57,7 @@ class About extends React.Component {
               Storytelling
             </Typography>
 
-            {parse(body)}
+            {parse(about.body ? about.body : "")}
           </CardContent>
         </Grid>
       </Card>
@@ -79,4 +65,19 @@ class About extends React.Component {
   }
 }
 
-export default withStyles(useStyles)(About);
+const mapStateToProps = (state) => {
+  return {
+    about: selectAbout(state),
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAbout: () => dispatch(getAbout()),
+  };
+};
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(useStyles)
+)(About);

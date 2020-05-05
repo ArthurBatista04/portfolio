@@ -37,10 +37,6 @@ const useStyles = (theme) => ({
 });
 
 class Skills extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { skills: [], icons: {} };
-  }
 
   componentWillMount() {
     this.props.getSkills();

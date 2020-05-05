@@ -9,8 +9,13 @@ import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
 import "react-vertical-timeline-component/style.min.css";
 import WorkIcon from "@material-ui/icons/Work";
-import db from "../firebase/Firebase";
 import SchoolIcon from "@material-ui/icons/School";
+import { connect } from "react-redux";
+import { compose } from "ramda";
+import {
+  selectExperiences,
+  getExperiences,
+} from "../redux/reducers/ExperiencesReducer";
 const useStyles = (theme) => ({
   root: {
     minWidth: 275,
@@ -29,23 +34,8 @@ const useStyles = (theme) => ({
 });
 
 class Experiences extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { experiences: [] };
-  }
   componentWillMount() {
-    db.collection("Experiences")
-      .orderBy("hasEnded", "asc")
-      .get()
-      .then((data) => {
-        const experiences = data.docs.map((experience) => experience.data());
-        this.setState({
-          experiences,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.props.getExperiences();
   }
 
   formatDate(hasEnded, beginDate, endDate) {
@@ -56,8 +46,7 @@ class Experiences extends React.Component {
     return `${beginning.getFullYear()} - Present`;
   }
   render() {
-    const { classes } = this.props;
-    const { experiences } = this.state;
+    const { classes, experiences } = this.props;
     return (
       <Card id="Experience" className={classes.root}>
         <CardContent>
@@ -112,4 +101,19 @@ class Experiences extends React.Component {
   }
 }
 
-export default withStyles(useStyles)(Experiences);
+const mapStateToProps = (state) => {
+  return {
+    experiences: selectExperiences(state),
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getExperiences: () => dispatch(getExperiences()),
+  };
+};
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(useStyles)
+)(Experiences);

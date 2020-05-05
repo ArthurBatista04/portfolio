@@ -30,6 +30,7 @@ export const reducer = createReducer(INITIAL_STATE, {
 export const getSkills = () => async (dispatch, getState) => {
   let icons = [];
   const response = await db.collection("Skills").orderBy("name").get();
+  if (response.empty) return;
   const skills = response.docs.map(buildSkill);
   dispatch(Creators.skills(skills));
   for (let skill of skills) {

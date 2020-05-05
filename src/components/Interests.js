@@ -17,6 +17,7 @@ const useStyles = (theme) => ({
 });
 const hobbies = [
   {
+    id: 1,
     image:
       "https://image.freepik.com/free-photo/river-foggy-mountains-landscape_1204-511.jpg",
     title: "Nature Around Us",
@@ -47,7 +48,7 @@ class Interests extends Component {
           >
             {hobbies.map((hobbie) => {
               return (
-                <Grid item xs={12} sm={6} md={3}>
+                <Grid key={hobbie.id} item xs={12} sm={6} md={3}>
                   <CustomCard info={hobbie} />
                 </Grid>
               );
