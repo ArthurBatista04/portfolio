@@ -1,21 +1,17 @@
 import configureStore from "../CreateStore";
-import { history, dataProvider, authProvider } from "../../constants";
 import { reducer as formReducer } from "redux-form";
-export const reducers = {
+import { combineReducers } from 'redux'
+export const reducers = combineReducers({
   skills: require("./SkillsReducer").reducer,
   experiences: require("./ExperiencesReducer").reducer,
   about: require("./AboutReducer").reducer,
   form: formReducer,
-};
+});
 
 export default () => {
-  let rootReducer = reducers;
-  let { store } = configureStore({
-    rootReducer,
-    history,
-    dataProvider,
-    authProvider,
-  });
+  let finalReducers = reducers;
+
+  let { store } = configureStore(finalReducers);
   if (module.hot) {
     module.hot.accept(() => {
       const nextRootReducer = require("./").reducers;
