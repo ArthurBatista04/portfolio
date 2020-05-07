@@ -4,6 +4,9 @@ import CustomCard from "./CustomCard";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
+import { selectInterests, getInterests } from "../redux/reducers/InterestsReducer";
+import { compose } from "redux";
+import { connect } from "react-redux";
 const useStyles = (theme) => ({
   root: {
     minWidth: 275,
@@ -15,30 +18,17 @@ const useStyles = (theme) => ({
     justifyContent: "center",
   },
 });
-const hobbies = [
-  {
-    id: 1,
-    image:
-      "https://image.freepik.com/free-photo/river-foggy-mountains-landscape_1204-511.jpg",
-    title: "Nature Around Us",
-    description:
-      "We are going to learn different kinds of species in nature that live together to form amazing environment",
-    avatars: [
-      "http://i.pravatar.cc/300?img=1",
-      "http://i.pravatar.cc/300?img=2",
-      "http://i.pravatar.cc/300?img=3",
-      "http://i.pravatar.cc/300?img=4",
-    ],
-  },
-];
 class Interests extends Component {
+  componentWillMount(){
+    this.props.getInterests()
+  }
   render() {
-    const { classes } = this.props;
+    const { classes, interests } = this.props;
     return (
       <div>
         <Card id="Interests" className={classes.root}>
           <Typography className={classes.title} variant="h5" component="h2">
-            My Life Pleasures
+            Interests
           </Typography>
           <Grid
             container
@@ -46,10 +36,10 @@ class Interests extends Component {
             justify="flex-start"
             alignItems="flex-start"
           >
-            {hobbies.map((hobbie) => {
+            {interests.map((interest) => {
               return (
-                <Grid key={hobbie.id} item xs={12} sm={6} md={3}>
-                  <CustomCard info={hobbie} />
+                <Grid key={interest.id} item xs={12} sm={6} md={3}>
+                  <CustomCard info={interest} />
                 </Grid>
               );
             })}
@@ -60,4 +50,20 @@ class Interests extends Component {
   }
 }
 
-export default withStyles(useStyles)(Interests);
+
+const mapStateToProps = (state) => {
+  return {
+    interests: selectInterests(state),
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getInterests: () => dispatch(getInterests()),
+  };
+};
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(useStyles)
+)(Interests);

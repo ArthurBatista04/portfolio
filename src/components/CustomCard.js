@@ -1,6 +1,7 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
+import AvatarGroup from "@material-ui/lab/AvatarGroup";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
@@ -10,7 +11,6 @@ import Typography from "@material-ui/core/Typography";
 const styles = (muiBaseTheme) => ({
   card: {
     maxWidth: 300,
-    height: 400,
     margin: "auto",
     transition: "0.3s",
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
@@ -37,7 +37,7 @@ const styles = (muiBaseTheme) => ({
   },
   avatar: {
     display: "inline-block",
-    border: "2px solid white",
+    border: "2px solid gray",
     "&:not(:first-of-type)": {
       marginLeft: muiBaseTheme.spacing(-1),
     },
@@ -54,26 +54,36 @@ class CustomCard extends React.Component {
     return (
       <div className={classes.app}>
         <Card className={classes.card}>
-          <CardMedia className={classes.media} image={info.image} />
+          <CardMedia className={classes.media} image={info.pictures.src} />
           <CardContent className={classes.content}>
             <Typography
-              className={"MuiTypography--heading"}
               variant={"h6"}
               gutterBottom
+              align="center"
             >
-              {info.title}
+              {info.name}
             </Typography>
             <Typography
-              className={"MuiTypography--subheading"}
               variant={"caption"}
+              align="justify"
             >
               {info.description}
             </Typography>
             <Divider className={classes.divider} light />
-            {info.avatars &&
-              info.avatars.map((face) => (
-                <Avatar className={classes.avatar} key={face} src={face} />
-              ))}
+            <AvatarGroup>
+              {info.avatars &&
+                info.avatars.map((face) => {
+                  console.log(face)
+                  return (
+                    <Avatar
+                      className={classes.avatar}
+                      alt={face.name}
+                      key={face.avatarId}
+                      src={face.pictures.src}
+                    />
+                  );
+                })}
+            </AvatarGroup>
           </CardContent>
         </Card>
       </div>

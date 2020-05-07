@@ -1,10 +1,11 @@
 import configureStore from "../CreateStore";
 import { reducer as formReducer } from "redux-form";
-import { combineReducers } from 'redux'
+import { combineReducers } from "redux";
 export const reducers = combineReducers({
   skills: require("./SkillsReducer").reducer,
   experiences: require("./ExperiencesReducer").reducer,
   about: require("./AboutReducer").reducer,
+  interests: require("./InterestsReducer").reducer,
   form: formReducer,
 });
 
