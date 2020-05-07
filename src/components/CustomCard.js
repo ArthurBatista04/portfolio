@@ -56,24 +56,16 @@ class CustomCard extends React.Component {
         <Card className={classes.card}>
           <CardMedia className={classes.media} image={info.pictures.src} />
           <CardContent className={classes.content}>
-            <Typography
-              variant={"h6"}
-              gutterBottom
-              align="center"
-            >
+            <Typography variant={"h6"} gutterBottom align="center">
               {info.name}
             </Typography>
-            <Typography
-              variant={"caption"}
-              align="justify"
-            >
+            <Typography variant={"caption"} align="justify">
               {info.description}
             </Typography>
             <Divider className={classes.divider} light />
             <AvatarGroup>
               {info.avatars &&
                 info.avatars.map((face) => {
-                  console.log(face)
                   return (
                     <Avatar
                       className={classes.avatar}
