@@ -30,7 +30,7 @@ class Main extends Component {
     return (
       <div>
         <Container maxWidth="lg">
-          <Header title="Hi, nice to meet you." sections={sections} />
+          <Header title="Welcome" sections={sections} />
           <main>
             <Introdution post={mainFeaturedPost}></Introdution>
             <About></About>

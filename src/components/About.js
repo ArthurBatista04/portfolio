@@ -54,7 +54,7 @@ class About extends React.Component {
           />
           <CardContent>
             <Typography className={classes.title} variant="h5" component="h2">
-              Storytelling
+              Background
             </Typography>
 
             {parse(about.body ? about.body : "")}
