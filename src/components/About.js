@@ -5,7 +5,6 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import db from "../firebase/Firebase";
 import parse from "html-react-parser";
 import { connect } from "react-redux";
 import { compose } from "ramda";
@@ -53,11 +52,12 @@ class About extends React.Component {
             title="My profile picture"
           />
           <CardContent>
-            <Typography className={classes.title} variant="h5" component="h2">
+            <Typography align="center" variant="h5" component="h2">
               Background
             </Typography>
-
-            {parse(about.body ? about.body : "")}
+            <Typography variant="subtitle1" align="justify">
+              {parse(about.body ? about.body : "")}
+            </Typography>
           </CardContent>
         </Grid>
       </Card>

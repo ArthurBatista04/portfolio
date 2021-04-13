@@ -12,6 +12,7 @@
     "axios": "^0.19.2",
     "connected-react-router": "^6.8.0",
     "firebase": "^7.14.2",
+    "hamburger-react": "^2.4.0",
     "history": "^4.10.1",
     "html-react-parser": "^0.10.3",
     "ra-input-rich-text": "^3.3.1",

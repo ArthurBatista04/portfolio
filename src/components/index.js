@@ -8,7 +8,8 @@ import ContactForm from "./ContactForm";
 import Router from "./Router";
 import Scroll from "./Scroll";
 import SvgIcon from "./SvgIcon";
-import Interests from './Interests'
+import Interests from "./Interests";
+import Menu from "./Menu";
 export {
   Header,
   Introdution,
@@ -19,6 +20,7 @@ export {
   ContactForm,
   Router,
   Scroll,
+  Menu,
   SvgIcon,
-  Interests
+  Interests,
 };

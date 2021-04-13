@@ -4,7 +4,11 @@ import CustomCard from "./CustomCard";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
-import { selectInterests, getInterests } from "../redux/reducers/InterestsReducer";
+import Container from "@material-ui/core/Container";
+import {
+  selectInterests,
+  getInterests,
+} from "../redux/reducers/InterestsReducer";
 import { compose } from "redux";
 import { connect } from "react-redux";
 const useStyles = (theme) => ({
@@ -19,23 +23,18 @@ const useStyles = (theme) => ({
   },
 });
 class Interests extends Component {
-  componentWillMount(){
-    this.props.getInterests()
+  componentWillMount() {
+    this.props.getInterests();
   }
   render() {
     const { classes, interests } = this.props;
     return (
-      <div>
-        <Card id="Interests" className={classes.root}>
-          <Typography className={classes.title} variant="h5" component="h2">
+      <Card id="Interests" className={classes.root}>
+        <Container>
+          <Typography gutterBottom align="center" variant="h5" component="h2">
             Interests
           </Typography>
-          <Grid
-            container
-            direction="row"
-            justify="flex-start"
-            alignItems="flex-start"
-          >
+          <Grid container spacing={3}>
             {interests.map((interest) => {
               return (
                 <Grid key={interest.id} item xs={12} sm={6} md={3}>
@@ -44,12 +43,11 @@ class Interests extends Component {
               );
             })}
           </Grid>
-        </Card>
-      </div>
+        </Container>
+      </Card>
     );
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {

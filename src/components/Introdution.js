@@ -31,11 +31,6 @@ const useStyles = makeStyles((theme) => ({
       paddingRight: 0,
     },
   },
-  center: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
 }));
 
 export default function MainFeaturedPost(props) {
@@ -58,7 +53,7 @@ export default function MainFeaturedPost(props) {
       <div className={classes.mainFeaturedPostContent}>
         <Typography
           component="h1"
-          className={classes.center}
+          align="center"
           variant="h3"
           color="inherit"
           gutterBottom

@@ -7,7 +7,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
-
+import Skeleton from "@material-ui/lab/Skeleton";
 const styles = (muiBaseTheme) => ({
   card: {
     maxWidth: 300,
@@ -59,22 +59,30 @@ class CustomCard extends React.Component {
             <Typography variant={"h6"} gutterBottom align="center">
               {info.name}
             </Typography>
-            <Typography variant={"caption"} align="justify">
+            <Typography variant={"subtitle2"} align="justify">
               {info.description}
             </Typography>
             <Divider className={classes.divider} light />
             <AvatarGroup>
-              {info.avatars &&
-                info.avatars.map((face) => {
-                  return (
-                    <Avatar
-                      className={classes.avatar}
-                      alt={face.name}
-                      key={face.avatarId}
-                      src={face.pictures.src}
+              {info?.avatars.length
+                ? info.avatars.map((face) => {
+                    return (
+                      <Avatar
+                        className={classes.avatar}
+                        alt={face.name}
+                        key={face.avatarId}
+                        src={face.pictures.src}
+                      />
+                    );
+                  })
+                : [1, 2, 3, 4].map((index) => (
+                    <Skeleton
+                      key={index}
+                      variant="circle"
+                      width={40}
+                      height={40}
                     />
-                  );
-                })}
+                  ))}
             </AvatarGroup>
           </CardContent>
         </Card>

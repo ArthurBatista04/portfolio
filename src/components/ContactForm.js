@@ -9,7 +9,6 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
 import { compose } from "ramda";
-import { emailRegEx } from "../constants";
 import { fireStatus } from "./SwalMixin";
 import { Field, reduxForm } from "redux-form";
 class ContactForm extends React.Component {
@@ -24,7 +23,7 @@ class ContactForm extends React.Component {
         email,
       });
       fireStatus(SUCCESS, "Your message was sent successfully");
-      this.props.reset()
+      this.props.reset();
     } catch (error) {
       fireStatus(FAILED);
     }
@@ -45,6 +44,7 @@ class ContactForm extends React.Component {
               label="E-mail"
               style={{ margin: 8 }}
               fullWidth
+              type="email"
               margin="normal"
               required
               variant="outlined"
@@ -110,9 +110,7 @@ const validate = (values) => {
       errors[field] = "Required";
     }
   });
-  if (values.email && !emailRegEx.test(values.email)) {
-    errors.email = "Invalid email address";
-  }
+
   return errors;
 };
 export default compose(

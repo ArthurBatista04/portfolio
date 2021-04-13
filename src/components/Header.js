@@ -16,8 +16,6 @@ const useStyles = makeStyles((theme) => ({
     overflowX: "auto",
   },
   a: {
-    padding: theme.spacing(1),
-    flexShrink: 0,
     color: "white",
     textDecoration: "none",
     "&:hover": {
@@ -57,7 +55,6 @@ export default function Header(props) {
         {sections.map((section) => (
           <AnchorLink
             key={section.title}
-            variant="body2"
             href={section.url}
             className={classes.a}
           >
